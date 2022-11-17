@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd"
+       xmlns:context="http://www.springframework.org/schema/context">
+    
+    <!-- Establecemos bean con datos de conexion para inyectarlo en el bean de abajo -->   
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.postgresql.Driver"></property>    
+        <property name="url" value="jdbc:postgresql://localhost:5432/entityBasico"></property>
+        <property name="username" value="postgres"></property>
+        <property name="password" value="fp13DAW"></property>
+    </bean>
+    
+    <!-- Con este bean referenciamos en bean de arriba y los inyectamos en el datasource de la clase Alumnoimplement -->
+    <bean id="inserta" class="app.conex.AlumnoImplement">
+        <property name="datasource" ref="dataSource"></property>
+    </bean>
+    
+</beans>
